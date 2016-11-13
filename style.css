@@ -1,0 +1,180 @@
+
+
+#header {
+	padding: 15px 0 15px 15px;
+	margin: 10px auto;
+	height: 80px;
+	/*border: 3px solid #ccccff;*/
+}
+
+#main {
+	margin-left: 200px;
+	width: auto;
+	height: 800px;
+	/*border: 3px solid #124554;*/
+	}
+	#first {
+		width: auto;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		height: 500px;
+		/*border: 3px solid #683728;*/
+		}
+		.partBar{
+			width: 100%;
+			height: 50px;
+			margin: 10px 0px;
+			background-color: #bfbfbf;
+			line-height: 50px;
+			font-size: 25px;
+		}
+		#first-left{
+			width: 300px;
+			height: 400px;
+			margin-left: 20px;
+			float: left;
+			/*border: 2px solid #547568;*/
+			}
+			.tableInput{
+				width: 55px;
+			}
+			#btnPlay{
+				width: 150px;
+				height: 40px;
+				background: #b3e4ff;
+				margin: 20px 20px;
+				font-size: 150%;
+				border-radius: 5px;
+			}
+			#table{
+				background: #ffcc66;
+			}
+
+		#first-right{
+			width: 256px;
+			height: 400px;
+			float: right;
+			margin-right: 50px;
+			/*margin-right: 100px;*/
+			/*margin-left: 30px;*/
+			/*border: 2px solid #866521;*/
+			}
+			
+			#graphName{
+				text-align: center;
+				font-size: 30px;
+				height: 60px;
+			}
+			#graph{
+				/*margin-top: 60px;*/
+				/*margin-right: 100px;*/
+				
+			}
+
+		#first-center{
+			width:600px;
+			height: 500px;
+			/*background-color: #ffd480;*/
+			/*border: 2px solid red;*/
+			margin: 0 320px 0 310px;
+			}
+			#display{
+				width: 400px;
+				margin: 0 auto;
+			}
+			.btn{
+				width: 130px;
+				height: 40px;
+				background: #b3e4ff;
+				margin: 10px 10px;
+				font-size: 150%;
+				border-radius: 5px;
+			}
+			#can{
+				border: 3px solid red;
+				/*width: 400px;*/
+				/*height: 400px;*/
+				/*margin: 25px 30px;*/
+				/*margin-left: 20%;*/
+			}
+			#posDisplay{
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+			}
+			#first-center ul {
+				list-style: none;
+			}
+			#first-center ul li{
+				margin: 20px 10px;
+			}
+			#first-center ul li a{
+				text-decoration: none;
+			}
+
+
+	#second {
+		width: auto;
+		height: 600px;
+		/*border: 3px solid #179271;	*/
+		}
+		.freq {
+			width: 30px;
+		}
+		.signal{
+			/*padding: 20px;*/
+			margin-bottom: 10px; 
+			/*border: 2px solid #456371;*/
+			}
+			.signalDetail{
+				width: 240px;
+				height: 150px;
+				float: left;
+				line-height: 150px;
+				background-color: #e5ffe5;
+				text-align: center;
+				/*margin-top: 45%;*/
+			}
+			.five{
+				margin-left: 260px;
+				height: 150px;
+				width: 400px;
+				/*padding-top: 10px;*/
+
+				/*border: 2px solid #478954;*/
+				}
+				.part1{
+					height: 60px;
+					width: auto;
+					line-height: 60px;
+					/*border: 2px solid #764271;*/
+					background-color: #ccccff;
+					overflow: auto;
+				}
+				.part2{
+					height: 80px;
+					width: auto;
+					/*border: 2px solid #764271;*/
+					background-color: #ccffee;
+					margin-top: 10px;
+					overflow: auto;
+				}
+
+#sidebar {
+	width: 180px;
+	float: left;
+	height: 500px; 
+	/*border: 3px solid #245212;*/
+	padding: 0 0 0 15px;
+	}
+	#sidebar ul {
+		list-style: none;
+	}
+	#sidebar ul li{
+		margin: 20px 10px;
+	}
+	#sidebar ul li a{
+		text-decoration: none;
+	}
+
+	

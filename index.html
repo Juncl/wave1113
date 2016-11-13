@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>页面重构</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<div id="header">
+		<h1 align="center">基于实时傅里叶变换的室内定位可视化系统</h1>
+	</div>
+
+	<div id="content">
+		<div id="sidebar">
+
+			<ul>
+				<li> <a href="./index.html">首页</a></li>
+				<li> <a href="./spectrum.html">定位仿真</a> </li>
+				<li> <a href="./time.html">时域分析</a></li>
+			</ul>
+			
+		</div>
+
+		<div id="main">
+
+			<div id="first">
+				<div class="partBar">
+					第一部分 定位及频谱图
+				</div>
+				<div id="first-left">
+					<div id="btn">
+					<button id="btnPlay" onclick="BtnClick()">基准时间</button>
+					</div>
+
+					<table cellspacing="10" id="table">
+						<tr>
+					<td>频域/时域 : </td>
+					<td>
+						<select id="mode" onchange="Setup()">
+						<option>Frequency</option>
+						<option>TimeDomain</option>
+						</select>
+					</td>
+						</tr>
+
+						<tr>
+					<td>滤波时间常数 : </td>
+					<td>
+						<input class="tableInput" type="text" id="smoothing" value="0.9" onchange="Setup()"/>
+					</td>
+						</tr>
+
+						<tr>
+					<td>窗长选择 : </td>
+					<td>
+						<select id="fftSizeMode" onchange="Setup()">
+						<option>512</option>
+						<option>1024</option>
+						<option>2048</option>
+						</select>
+					</td>
+						</tr>
+
+						<tr>
+					<td>最小分贝 : </td>
+					<td><input class="tableInput" type="text" id="min" onchange="Setup()"/></td>
+						</tr>
+
+						<tr>
+					<td>最大分贝 : </td>
+					<td><input class="tableInput" type="text" id="max" onchange="Setup()"/></td>
+						</tr>
+					</table>
+					
+				</div>
+
+				<div id="first-right">
+					<div id="graphName" >频谱图</div>
+					<canvas id="graph" width=256 height=256></canvas>
+				</div>
+
+				<div id="first-center">
+					<div id="display">
+						<div>
+							<button class="btn" id="btnRandom">随机模拟</button>
+							<button class="btn" id="btnReal">真实场景</button>
+						</div>
+						<canvas id="can" width="300" height="300"></canvas>
+						<div id="posDisplay">
+							
+						</div>
+					</div>
+
+				</div>
+				
+			</div>
+
+			<div id="second">
+				<div class="partBar">
+					第二部分 信标节点数据可视化
+				</div>
+				<div>
+					<div class="signal">
+						<div class="signalDetail">信标1  频率/KHz：<input type="text" class="freq" id="freq1"> <span id="freqDetail1"> </span></div>
+					    <div class="five">
+						    <div class="part1" id="five1"></div>
+					        <div class="part2" id="fiveTime1"></div>
+					    </div>
+					</div>
+
+					<div class="signal">
+						<div class="signalDetail">信标2  频率/KHz：<input type="text" class="freq" id="freq2"> <span id="freqDetail2"></span> </div>
+						<div class="five">
+						    <div class="part1"  id="five2"></div>
+					        <div class="part2" id="fiveTime2"></div>
+					    </div>
+					</div>
+
+					<div class="signal">
+						<div class="signalDetail">信标3  频率/KHz：<input type="text" class="freq" id="freq3"> <span id="freqDetail3"></span></div>
+						<div class="five">
+						    <div class="part1" id="five3"></div>
+					        <div class="part2" id="fiveTime3"></div>
+					    </div>
+					</div>
+
+				</div>
+			</div>
+
+			<div id="third">
+				<div class="partBar">
+					第三部分 误差分析
+				</div>
+
+			</div>
+			
+		</div>
+		
+	</div>
+
+	<!-- <script type="text/javascript" src="waapisim.js"></script> -->
+	<script type="text/javascript" src="index.js"></script>
+	<!-- <script type="text/javascript" src="movecircle.js"></script> -->
+	<!-- <script type="text/javascript" src="./classes/utils.js"></script> -->
+	<script type="text/javascript" src="./classes/ball.js"></script>
+
+	<script type="text/javascript" src="display.js"></script>
+
+</body>
+</html>
