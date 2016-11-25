@@ -84,6 +84,8 @@ function drawFrame () {
 var btnRandom = document.getElementById("btnRandom");
 var btnReal = document.getElementById("btnReal");
 
+var btnDisplay = document.getElementById("btnDisplay");
+
 btnRandom.onclick = function random(){
 	btnRandom.style.background = "#cc6600";
 	btnReal.style.background = "#b3e4ff";

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>读文件流</title>
+	<title>读麦克风信号流</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="style.css">
 </head>
@@ -15,8 +15,11 @@
 		<div id="sidebar">
 
 			<ul>
-				<li> <a href="./index.html">读文件流定位</a></li>
-				<li> <a href="./microphone.html">真实场景定位</a> </li>
+				<li> 
+				<a href="./index.html">读文件流定位</a>
+				</li>
+				<li>
+				 <a href="./microphone.html">真实场景定位</a> </li>
 			</ul>
 			
 		</div>
@@ -51,23 +54,6 @@
 						</tr>
 
 						<tr>
-						<tr>
-
-					<td>WAV文件选择 : </td>
-						<td>
-						<select id="fileMode" onchange="FileChange()">
-	
-							
-							<option>4K200ms</option>
-							<option>496K200ms20ms</option>
-							<option>4K400ms40ms</option>
-							<option>4K200ms10ms</option>
-							<option>4K200ms20ms</option>
-							<option>4K200ms20ms9K</option>
-		
-						</select>
-						</td>
-					</tr>
 					<td>窗长选择 : </td>
 					<td>
 						<select id="fftSizeMode" onchange="Setup()">
@@ -92,23 +78,24 @@
 				</div>
 
 				<div id="first-right">
-					<button class="btn" id="btnDisplay" onclick="Play()">Play</button>
+					<button class="btn" id="stream">麦克风</button>
 					<canvas id="graph" width=256 height=256></canvas>
-					<div id="graphName" >频谱图</div>
+					<div id="graphName" >
+					频谱图 
+					</div>
 				</div>
 
 				<div id="first-center">
 					<div id="display">
 						<div>
 							<button class="btn" id="btnRandom">文件定位</button>
-							<button class="btn" style="visibility: hidden;" id="btnReal">真实场景</button>
+							<button class="btn" id="btnReal">真实场景</button>
 						</div>
 						<canvas id="can" width="300" height="300"></canvas>
 						<div id="posDisplay">
 							
 						</div>
 					</div>
-
 				</div>
 				
 			</div>
@@ -155,13 +142,11 @@
 		</div>
 		
 	</div>
+
+	<script type="text/javascript" src="readMicrophone.js"></script>
 	<script type="text/javascript" src="ball.js"></script>
 
 	<script type="text/javascript" src="display.js"></script>
-	<!-- <script type="text/javascript" src="waapisim.js"></script> -->
-	<script type="text/javascript" src="index.js"></script>
-	<!-- <script type="text/javascript" src="movecircle.js"></script> -->
-	<!-- <script type="text/javascript" src="./classes/utils.js"></script> -->
 
 </body>
 </html>

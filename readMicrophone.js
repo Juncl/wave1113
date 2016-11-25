@@ -21,8 +21,8 @@ var fftSizeMode = 1;
 var src = null;
 var stream;
 var analyser = audioctx.createAnalyser();
-analyser.minDecibels = -70;
-analyser.maxDecibels = -30;
+analyser.minDecibels = -90;
+analyser.maxDecibels = -10;
 analyser.fftSize = 1024;
 
 var distortion = audioctx.createWaveShaper();
@@ -50,37 +50,51 @@ for(var i = 0; i < 256; ++i) {
 	gradline[i].addColorStop(1, "rgb(255," + i + ",0)");
 }
 
+if (navigator.getUserMedia) {
+   console.log('getUserMedia supported.');
+   navigator.getUserMedia (
+      // constraints - only audio needed for this app
+      {
+         audio: true
+      },
+
+      // Success callback
+      function(stream) {
+         src = audioctx.createMediaStreamSource(stream);
+         src.connect(analyser);
+         analyser.connect(distortion);
+         distortion.connect(biquadFilter);
+         biquadFilter.connect(convolver);
+         convolver.connect(gainNode);
+         gainNode.connect(audioctx.destination);
+
+      	 DrawGraph();
+
+      },
+
+      // Error callback
+      function(err) {
+         console.log('The following gUM error occured: ' + err);
+      }
+   );
+} else {
+   console.log('getUserMedia not supported on your browser!');
+}
+
 function Stop() {
 	if(src) src.stop(0);
 	src = null;
 }
 
 function Play() {
-	console.log("smg  ..");
 	if(src === null) {
 		src = audioctx.createBufferSource();
 		src.buffer = buffer;
-		src.loop = true;
+		src.loop = false;
 		src.connect(audioctx.destination);
 		src.connect(analyser);
 		src.start(0);
 	}
-	random();
-}
-
-function LoadSample(ctx, url) {
-	var req = new XMLHttpRequest();
-	req.open("GET", url, true);
-	req.responseType = "arraybuffer";
-	req.onload = function () {
-		if(req.response) {
-//			buffer = ctx.createBuffer(req.response, false);
-			ctx.decodeAudioData(req.response,function(b){buffer=b;},function(){});
-		}
-		else
-			buffer = ctx.createBuffer(VBArray(req.responseBody).toArray(), false);
-	}
-	req.send();
 }
 
 function Setup() {
@@ -88,19 +102,6 @@ function Setup() {
 	mode = document.getElementById("mode").selectedIndex;
 	fileMode = document.getElementById("fileMode").selectedIndex;
 	fftSizeMode = document.getElementById("fftSizeMode").selectedIndex;
-	if(fileMode == 0){
-		LoadSample(audioctx, "./0921/4K200ms.wav");
-	}else if(fileMode == 1) {
-		LoadSample(audioctx, "./0921/496K200ms20ms.wav");
-	}else if(fileMode == 2) {
-		LoadSample(audioctx, "./0921/4K400ms40ms.wav");
-	}else if(fileMode == 3) {
-		LoadSample(audioctx, "./0921/4K200ms10ms.wav");
-	}else if(fileMode == 4) {
-		LoadSample(audioctx, "./0921/4K200ms20ms.wav");
-	}else if(fileMode == 5) {
-		LoadSample(audioctx, "./0921/4K200ms20ms9K.wav");
-	}
 	
 	if(fftSizeMode == 0){
 		analyser.fftSize = 512;
@@ -112,9 +113,9 @@ function Setup() {
 	analyser.smoothingTimeConstant = parseFloat(document.getElementById("smoothing").value);
 }
 
-var freqValue1 = 4;
-var freqValue2 = 9;
-var freqValue3 = 6;
+var freqValue1 = 3;
+var freqValue2 = 12;
+var freqValue3 = 14;
 var freq1 = document.getElementById("freq1");
 var freq2 = document.getElementById("freq2");
 var freq3 = document.getElementById("freq3");
@@ -166,6 +167,7 @@ function DrawGraph() {
 	freqDetail2.innerHTML = getPosValue(freq2.value, data);
 	freqDetail3.innerHTML = getPosValue(freq3.value, data);
 
+	// ********************* 信号1 *******************//
 	if(five1.length == 1){
 		five1Time.push(new Date() - nowTime);
 	}else if(five1.length == 5){
@@ -184,6 +186,7 @@ function DrawGraph() {
 		}
 	}
 
+	// ********************* 信号2 *******************//
 	if(five2.length == 1){
 		five2Time.push(new Date() - nowTime);
 	}else if(five2.length == 5){
@@ -203,6 +206,7 @@ function DrawGraph() {
 		}
 	}
 
+	// ********************* 信号3 *******************//
 	if(five3.length == 1){
 		five3Time.push(new Date() - nowTime);
 	}else if(five3.length == 5){
@@ -246,10 +250,6 @@ function DrawGraph() {
 	for(var i = 0; i < 256; ++i) {
 		if(i<6){
 			data[i] = 0;
-		}
-
-		if(data[i]){
-			console.log(i+" "+data[i]);
 		}
 		
 		ctx.fillStyle = gradline[data[i]];
@@ -371,8 +371,7 @@ function arrEqualZero(arr){
 
 
 Setup();
-setInterval(DrawGraph, 50);
-// DrawGraph();
+// setInterval(DrawGraph, 50);
 
 //*********信号1频率改变时清零***********//
 freq1.onchange = function(){
@@ -418,6 +417,7 @@ function init(){
 	alert("系统初始化完成！");
 }
 
+var hhhh = 123;
 
 
 // *****************  Display
