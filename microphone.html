@@ -88,8 +88,8 @@
 				<div id="first-center">
 					<div id="display">
 						<div>
-							<button class="btn" id="btnRandom">文件定位</button>
-							<button class="btn" id="btnReal">真实场景</button>
+							<button class="btn" id="btnRandom">真实场景</button>
+							<button class="btn" id="btnReal">清除位置</button>
 						</div>
 						<canvas id="can" width="300" height="300"></canvas>
 						<div id="posDisplay">
@@ -104,7 +104,7 @@
 				<div class="partBar">
 					第二部分 信标节点数据可视化
 				</div>
-				<div>
+				<div class="second-left">
 					<div class="signal">
 						<div class="signalDetail">信标1  频率/KHz：<input type="text" class="freq" id="freq1"> <span id="freqDetail1"> </span></div>
 					    <div class="five">
@@ -130,11 +130,16 @@
 					</div>
 
 				</div>
+
+				<div class="second-right">
+					
+				</div>
 			</div>
 
 			<div id="third">
 				<div class="partBar">
-					<!-- 第三部分 误差分析 -->
+					第三部分 误差分析
+					<div id="api2data"></div>
 				</div>
 
 			</div>
@@ -143,10 +148,23 @@
 		
 	</div>
 
-	<script type="text/javascript" src="readMicrophone.js"></script>
+	<script type="text/javascript" src="JuncUtil.js"></script>
 	<script type="text/javascript" src="ball.js"></script>
-
-	<script type="text/javascript" src="display.js"></script>
+	<script type="text/javascript" src="readMicrophone.js"></script>
+	<!-- <script type="text/javascript" src="newMicrophone.js"></script> -->
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+

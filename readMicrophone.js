@@ -1,3 +1,147 @@
+var canvas = document.getElementById('can'),
+    context = canvas.getContext('2d'),
+    ball = new Ball(5, "#789123"),
+    angle = 0,
+    centerY = 200,
+    range = 50,
+    xspeed = 1,
+    yspeed = 0.05;
+
+    blueBall1 = new Ball(10, "#454121");
+    blueBall2 = new Ball(10, "#454121");
+    blueBall3 = new Ball(10, "#454121");
+        
+    context.font="16px Georgia"
+    blueBall1.x = 10;
+    blueBall1.y = 10;
+    blueBall1.draw(context);
+    context.fillText("信标1(0, 0, 2)", 20, 16);
+
+    blueBall2.x = 10;
+    blueBall2.y = 290;
+    blueBall2.draw(context);
+    context.fillText("信标2(0, 2, 2)", 180, 16);
+
+    blueBall3.x = 290;
+    blueBall3.y = 10;
+    blueBall3.draw(context);
+    context.fillText("信标2(2, 0, 2)", 20, 292);
+
+    ball.x = 0;
+
+    var flag = 1 // 0表示正向，1表示反向
+    var stop;
+        
+function drawFrame () {
+    stop = window.requestAnimationFrame(drawFrame);
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    if(ball.x < 290 && flag){
+    	ball.x += xspeed;
+    }
+    else {
+    	flag = 0;
+    	ball.x -= xspeed;
+    }
+
+    if(!flag && ball.x < 10){
+    	flag = 1;
+    	ball.x += xspeed;
+    }
+
+    if(five1Time && five2Time && five3Time){
+    	var point = JuncUtil.getPosition((five1Time[five1Time.length - 1]),
+    	(five2Time[five2Time.length - 1]),
+    	(five3Time[five3Time.length - 1]));
+
+    	ball.x = point.x;
+   		ball.y = point.y;
+    }else{
+    	ball.x = 0;
+   		ball.y = 0;
+    }
+
+
+
+    // ball.y = centerY + Math.sin(angle) * range;
+    // angle += yspeed;
+    
+    
+    var test = document.getElementById("test");
+    var posDisplay = document.getElementById("posDisplay");
+    test.innerHTML = "移动节点位置信息: " + point.x + ", " + point.y; 
+    posDisplay.innerHTML = "移动节点位置信息: " + point.x + ", " + point.y;
+    ball.draw(context);
+
+    var posString = "("+Math.floor(ball.x)+", "+Math.floor(ball.y)+")";
+
+    context.fillText(posString, (ball.x-30), Math.floor(ball.y - 20));
+
+    context.font="16px Georgia"
+    blueBall1.x = 10;
+    blueBall1.y = 10;
+    blueBall1.draw(context);
+    context.fillText("信标1(0, 0, 2)", 20, 16);
+
+    blueBall2.x = 10;
+    blueBall2.y = 290;
+    blueBall2.draw(context);
+    context.fillText("信标2(0, 2, 2)", 180, 16);
+
+    blueBall3.x = 290;
+    blueBall3.y = 10;
+    blueBall3.draw(context);
+    context.fillText("信标2(2, 0, 2)", 20, 292);
+       
+}
+
+      // drawFrame();
+      // var rand = document.getElementById("random");
+      // rand.onclick = random();
+
+      // var r = document.getElementById("real");
+      // r.onclick = real();
+var btnRandom = document.getElementById("btnRandom");
+var btnReal = document.getElementById("btnReal");
+
+var btnDisplay = document.getElementById("btnDisplay");
+
+btnRandom.onclick = function random(){
+	btnRandom.style.background = "#cc6600";
+	btnReal.style.background = "#b3e4ff";
+	window.cancelAnimationFrame(stop);
+    drawFrame();
+    console.log('Hello world.')
+}
+
+btnReal.onclick = function real(){
+	btnReal.style.background = "#cc6600";
+	btnRandom.style.background = "#b3e4ff";
+    window.cancelAnimationFrame(stop);
+    context.clearRect(0, 0, canvas.width, canvas.height);
+        
+    console.log("Real");
+
+    context.font="16px Georgia"
+    blueBall1.x = 10;
+    blueBall1.y = 10;
+    blueBall1.draw(context);
+    context.fillText("信标1(0, 0, 2)", 20, 16);
+
+    blueBall2.x = 10;
+    blueBall2.y = 290;
+    blueBall2.draw(context);
+    context.fillText("信标2(0, 2, 2)", 180, 16);
+
+    blueBall3.x = 290;
+    blueBall3.y = 10;
+    blueBall3.draw(context);
+    context.fillText("信标2(2, 0, 2)", 20, 292);
+}
+
+// *******************************************************************
+
+
 navigator.getUserMedia = (navigator.getUserMedia ||
                           navigator.webkitGetUserMedia ||
                           navigator.mozGetUserMedia ||
@@ -21,9 +165,9 @@ var fftSizeMode = 1;
 var src = null;
 var stream;
 var analyser = audioctx.createAnalyser();
-analyser.minDecibels = -90;
-analyser.maxDecibels = -10;
-analyser.fftSize = 1024;
+analyser.minDecibels = -70;
+analyser.maxDecibels = -30;
+analyser.fftSize = 512;
 
 var distortion = audioctx.createWaveShaper();
 var gainNode = audioctx.createGain();
@@ -100,7 +244,7 @@ function Play() {
 function Setup() {
 	console.log("setup");
 	mode = document.getElementById("mode").selectedIndex;
-	fileMode = document.getElementById("fileMode").selectedIndex;
+	// fileMode = document.getElementById("fileMode").selectedIndex;
 	fftSizeMode = document.getElementById("fftSizeMode").selectedIndex;
 	
 	if(fftSizeMode == 0){
@@ -113,9 +257,9 @@ function Setup() {
 	analyser.smoothingTimeConstant = parseFloat(document.getElementById("smoothing").value);
 }
 
-var freqValue1 = 3;
-var freqValue2 = 12;
-var freqValue3 = 14;
+var freqValue1 = 15;
+var freqValue2 = 17;
+var freqValue3 = 18;
 var freq1 = document.getElementById("freq1");
 var freq2 = document.getElementById("freq2");
 var freq3 = document.getElementById("freq3");
@@ -152,7 +296,9 @@ var flag3  = 0;
 var btnPlay = document.getElementById("btnPlay");
 
 function DrawGraph() {
-	drawVisual = requestAnimationFrame(DrawGraph);
+	// drawVisual = requestAnimationFrame(DrawGraph);
+
+	var ss = new Date().getTime();
 
 	ctx.fillStyle = gradbase;
 	ctx.fillRect(0, 0, 256, 256);
@@ -169,7 +315,7 @@ function DrawGraph() {
 
 	// ********************* 信号1 *******************//
 	if(five1.length == 1){
-		five1Time.push(new Date() - nowTime);
+		// five1Time.push(new Date() - nowTime);
 	}else if(five1.length == 5){
 		if(arrEqualZero(five1)){
 			flag1 = 1;
@@ -180,15 +326,16 @@ function DrawGraph() {
 		// five3Element.innerHTML = five3Element.innerHTML+"ABC";
 		if(freqDetail1.innerHTML != five1[4]){
 			flag1 = 0;
-			// five3Element.innerHTML = five3Element.innerHTML+"DEF";
-			five1Time.push(new Date() - nowTime);
-			// pos1Value.innerHTML = new Date().getTime();
+			var sTime1 = JuncUtil.timeToShortTime(new Date().getTime());
+			five1Time = pushValue(sTime1, five1Time);
+			loadJSON(1, new Date().getTime());
+			console.log("信标1："+new Date().getTime());		
 		}
 	}
 
 	// ********************* 信号2 *******************//
 	if(five2.length == 1){
-		five2Time.push(new Date() - nowTime);
+		// five2Time.push(new Date() - nowTime);
 	}else if(five2.length == 5){
 		if(arrEqualZero(five2)){
 			flag2 = 1;
@@ -199,16 +346,17 @@ function DrawGraph() {
 		// five3Element.innerHTML = five3Element.innerHTML+"ABC";
 		if(freqDetail2.innerHTML != five2[4]){
 			flag2 = 0;
-			// five3Element.innerHTML = five3Element.innerHTML+"DEF";
-			five2Time.push(new Date() - nowTime);
-			pos2Value.innerHTML = new Date().getTime();
+			var sTime2 = JuncUtil.timeToShortTime(new Date().getTime());
+			five2Time = pushValue(sTime2, five2Time);
+			loadJSON(2, new Date().getTime());
+			console.log("信标2："+new Date().getTime());
 
 		}
 	}
 
 	// ********************* 信号3 *******************//
 	if(five3.length == 1){
-		five3Time.push(new Date() - nowTime);
+		// five3Time.push(new Date() - nowTime);
 	}else if(five3.length == 5){
 		if(arrEqualZero(five3)){
 			flag3 = 1;
@@ -220,8 +368,11 @@ function DrawGraph() {
 		if(freqDetail3.innerHTML != five3[4]){
 			flag3 = 0;
 			// five3Element.innerHTML = five3Element.innerHTML+"DEF";
-			five3Time.push(new Date() - nowTime);
-			pos3Value.innerHTML = new Date().getTime();
+			var sTime3 = JuncUtil.timeToShortTime(new Date().getTime());
+			five3Time = pushValue(sTime3, five3Time);
+			loadJSON(3, new Date().getTime());
+			// five3Time = pushValue(randomTime(), five3Time);
+			console.log("信标3："+new Date().getTime());
 		}
 	}
 
@@ -251,10 +402,15 @@ function DrawGraph() {
 		if(i<6){
 			data[i] = 0;
 		}
+		if(i>100 && data[i] > 0){
+			console.log(i+" "+data[i]);
+		}
 		
 		ctx.fillStyle = gradline[data[i]];
 		ctx.fillRect(i, 256 - data[i], 1, data[i]);
 	}
+
+	// console.log("time: "+(ss-new Date().getTime()));
 }
 
 
@@ -299,6 +455,7 @@ function addElementLi(id,number,posValue,fValue){
 
 //找到对应点的值
 function getPosValue(pos, arr){
+	// pos = pos * 2;
 	var n = Math.floor(pos * 10.667);
 	if(n > arr.length - 2 || n < 2){
 		return 0;
@@ -371,13 +528,15 @@ function arrEqualZero(arr){
 
 
 Setup();
-// setInterval(DrawGraph, 50);
+setInterval(DrawGraph, 5);
+
 
 //*********信号1频率改变时清零***********//
 freq1.onchange = function(){
 	flag1  = 0;
 	five1 = [];
 	five1Time = [];
+	console.log("Freq1 change.");
 }
 
 //*********信号2频率改变时清零***********//
@@ -421,4 +580,67 @@ var hhhh = 123;
 
 
 // *****************  Display
+
+function randomTime(){
+	return Math.floor(Math.random()*5+5);
+}
+
+function changeColor(elem, color){
+
+}
+
+function loadJSON(id, time){
+    // var data_file = "http://www.tutorialspoint.com/json/data.json";
+    var data_file = "http://172.18.216.144:3000/api2?id="+id+"&time="+time;
+            
+    var http_request = new XMLHttpRequest();
+    try{
+        // Opera 8.0+, Firefox, Chrome, Safari
+        http_request = new XMLHttpRequest();
+        }catch (e){
+            // Internet Explorer Browsers
+            try{
+                http_request = new ActiveXObject("Msxml2.XMLHTTP");
+					
+            }catch (e) {
+				
+                try{
+                    http_request = new ActiveXObject("Microsoft.XMLHTTP");
+                }catch (e){
+                    // Something went wrong
+                    alert("Your browser broke!");
+                    return false;
+               	}
+					
+            }
+        }
+			
+        http_request.onreadystatechange = function(){
+			
+            if (http_request.readyState == 4  ){
+                // Javascript function JSON.parse to parse JSON data
+                var jsonObj = JSON.parse(http_request.responseText);
+
+                console.log(jsonObj[0]);
+				// console.log(jsonArr[1]);
+				var api2data = document.getElementById("api2data");
+				api2data.innerHTML = jsonObj[0][0].stime;
+
+                // jsonObj variable now contains the data structure and can
+                // be accessed as jsonObj.name and jsonObj.country.
+    //             document.getElementById("Name").innerHTML = jsonObj.name;
+    //            	document.getElementById("Country").innerHTML = jsonObj.time;
+				// var localTime = new Date().getTime();
+				// console.log("Server Time:"+jsonObj.time);
+				// console.log("Local Time:"+localTime);
+				// console.log(jsonObj.time - localTime);
+            }
+        }
+		http_request.open("GET", data_file, true);
+        http_request.send();
+}
+
+
+
+
 

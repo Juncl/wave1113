@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<p id="dis"></p>
+<p id="time"></p>
+<button onclick="getTime()">Get Time</button>
+
+<script>
+	function getTime(){
+		var dis = document.getElementById("dis");
+		var time = document.getElementById("time");
+		dis.innerHTML = new Date().getTime();
+		time.innerHTML = new Date();
+	}
+</script>
+
+</body>
+</html>
